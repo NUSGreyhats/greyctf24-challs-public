@@ -1,0 +1,21 @@
+author: Elma
+category: Pwn
+connection_info: nc challs.nusgreyhats.org 30212
+description: 'same source code, same bug, easy solve?
+
+
+  Author: Elma'
+extra:
+  decay: 100
+  initial: 1000
+  minimum: 100
+files:
+- dist-the-motorala-2.zip
+flags:
+- grey{s1mpl3_buff3r_0v3rfl0w_w4snt_1t?_r3m3mb3r_t0_r34d_th3_st0ryl1ne:)}
+name: The Motorala 2
+state: visible
+type: dynamic
+value: 1000
+requirements:
+  - "The Motorala ⛓️"

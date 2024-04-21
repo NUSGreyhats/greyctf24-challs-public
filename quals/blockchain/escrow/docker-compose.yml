@@ -1,0 +1,8 @@
+version: "3.3"
+services:
+  challenge:
+    container_name: blockchain-escrow
+    build: ./service
+    ports:
+      - 30101:30101
+      - 30102:30102

@@ -1,0 +1,7 @@
+services:
+  challenge:
+    container_name: misc-all-about-timing
+    build: ./service
+    ports:
+      - 31111:5000
+    privileged: true

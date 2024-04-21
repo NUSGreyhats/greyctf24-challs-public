@@ -1,0 +1,19 @@
+author: jro
+category: Pwn
+connection_info: nc challs.nusgreyhats.org 33456
+description: 'I heard you like heap, so I made a heap using a heap based heap!
+
+
+  Author: jro'
+extra:
+  decay: 100
+  initial: 1000
+  minimum: 100
+files:
+- dist-heap-heap-heap.zip
+flags:
+- grey{h34p5_0f_h34p_f0r_m4x1mum_c0nfu510n}
+name: Heap Heap Heap
+state: visible
+type: dynamic
+value: 1000

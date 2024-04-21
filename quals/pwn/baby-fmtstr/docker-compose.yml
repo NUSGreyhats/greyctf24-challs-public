@@ -1,0 +1,8 @@
+services:
+  challenge:
+    container_name: pwn-baby-fmtstr
+    build: service
+    privileged: true
+    ports:
+        - 31234:5000
+

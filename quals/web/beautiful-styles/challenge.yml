@@ -1,0 +1,24 @@
+author: Junhua
+category: Web
+connection_info: http://challs.nusgreyhats.org:33339
+description: 'I opened a contest to see who could create the most beautiful CSS styles.
+
+  Feel free to submit your CSS styles to me and I will add them to my website to judge
+  them.
+
+  I''ll even give you a sample of my site to get you started.
+
+  Flag only consists of numbers and uppercase letters.
+
+
+  Author: Junhua'
+extra:
+  decay: 100
+  initial: 1000
+  minimum: 100
+flags:
+- grey{X5S34RCH1fY0UC4NF1ND1T}
+name: Beautiful Styles
+state: visible
+type: dynamic
+value: 1000

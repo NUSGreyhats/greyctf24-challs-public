@@ -1,0 +1,6 @@
+services:
+  crypto-ipfe:
+    build: ./service
+    ports:
+      - 35102:5000
+    privileged: true

@@ -1,0 +1,22 @@
+author: Elma
+category: Pwn
+connection_info: nc challs.nusgreyhats.org 30211
+description: 'i bet u wont guess my pin
+
+
+  _This challenge unlocks 1 other pwn challenge._
+
+
+  Author: Elma'
+extra:
+  decay: 100
+  initial: 1000
+  minimum: 100
+files:
+- dist-the-motorala.zip
+flags:
+- grey{g00d_w4rmup_for_p4rt_2_hehe}
+name: "The Motorala ⛓️"
+state: visible
+type: dynamic
+value: 1000

@@ -1,0 +1,8 @@
+services:
+    challenge:
+        container_name: web-markdown-parser
+        build: deploy
+        ports:
+            - 33335:3000
+        environment:
+            - FLAG=grey{m4rkd0wn_th1s_fl4g}

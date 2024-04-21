@@ -1,0 +1,20 @@
+author: uhg
+category: Pwn
+connection_info: nc challs.nusgreyhats.org 32345
+description: 'I have opened a new shop for baby goods! Feel free to explore around
+  :)
+
+
+  Author: uhg'
+extra:
+  decay: 100
+  initial: 1000
+  minimum: 100
+files:
+- dist-baby-goods.zip
+flags:
+- grey{4s_34sy_4s_t4k1ng_c4ndy_fr4m_4_b4by}
+name: Baby Goods
+state: visible
+type: dynamic
+value: 1000

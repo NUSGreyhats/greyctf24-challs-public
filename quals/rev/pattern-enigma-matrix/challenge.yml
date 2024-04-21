@@ -1,0 +1,22 @@
+name: Pattern Enigma Matrix
+author: Daniel X Junhua
+category: Rev
+description: |-
+  I made this program that checks if the flag is correct.
+  However, I forgot the flag....
+  Can you help me recover it?
+
+  Author: Daniel X Junhua
+value: 1000
+type: dynamic
+
+extra:
+  initial: 1000
+  decay: 100
+  minimum: 100
+
+flags:
+- grey{c0mp1le_t1m3_p4tt3rn_m4tch1nG_eefd669870fc2fec5cef6f33a17d0b9c}
+
+files:
+- dist/dist-pattern-enigma-matrix.zip

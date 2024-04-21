@@ -1,0 +1,22 @@
+name: Greyhats Dollar
+author: MiloTruck
+category: Blockchain
+description: |-
+  Worried about inflation?
+  Introducing GreyHats Dollar (GHD), the world's first currency with deflation built-in! Backed by GREY tokens, GHD will automatically deflate at a rate of 3% every year.
+
+  Author: MiloTruck
+value: 1000
+type: dynamic
+
+extra:
+  initial: 1000
+  decay: 100
+  minimum: 100
+connection_info: nc challs.nusgreyhats.org 30201
+
+flags:
+- grey{self_transfer_go_brrr_9e8284917b42282d}
+
+files:
+- dist/dist-greyhats-dollar.zip

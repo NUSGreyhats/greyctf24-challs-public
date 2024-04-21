@@ -1,0 +1,22 @@
+author: nil
+category: Misc
+description: 'I lost my grey cat when we were overseas. 
+
+
+  This is the last picture I found of it, but I have no idea where it is. Can you help me identify this beach?
+
+
+  The flag format is `grey{name_of_beach_in_lower_case}`.'
+
+extra:
+  decay: 100
+  initial: 1000
+  minimum: 100
+files:
+- dist-Cats-At-The-Beach.zip
+flags:
+- grey{pham_van_dong}
+name: Cats At The Beach
+state: visible
+type: dynamic
+value: 1000

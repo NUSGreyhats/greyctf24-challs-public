@@ -1,0 +1,7 @@
+services:
+  challenge:
+    container_name: misc-maze-runner
+    build: ./service
+    ports:
+      - 31112:5000
+    privileged: true

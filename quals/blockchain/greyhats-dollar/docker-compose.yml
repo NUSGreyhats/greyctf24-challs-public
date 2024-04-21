@@ -1,0 +1,7 @@
+services:
+  challenge:
+    container_name: blockchain-greyhats-dollar
+    build: ./service
+    ports:
+      - 30201:30201
+      - 30202:30202

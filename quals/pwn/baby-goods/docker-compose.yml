@@ -1,0 +1,7 @@
+services:
+  challenge:
+    container_name: pwn-baby-goods
+    build: service
+    privileged: true
+    ports:
+        - 32345:5000

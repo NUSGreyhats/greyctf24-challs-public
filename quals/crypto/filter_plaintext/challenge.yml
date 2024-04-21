@@ -1,0 +1,21 @@
+author: hadnot
+category: Crypto
+connection_info: nc challs.nusgreyhats.org 32223
+description: 'Maybe this will work?
+
+
+  Author: hadnot'
+extra:
+  decay: 100
+  initial: 1000
+  minimum: 100
+files:
+- dist-filter_plaintext.zip
+flags:
+- grey{pcbc_d3crypt10n_0r4cl3_3p1c_f41l}
+name: Filter Plaintext
+state: visible
+type: dynamic
+value: 1000
+requirements:
+  - "Filter Ciphertext \u26D3\uFE0F"

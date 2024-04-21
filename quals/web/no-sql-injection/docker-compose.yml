@@ -1,0 +1,21 @@
+services:
+  app:
+    container_name: web-no-sqli-app
+    build:
+      context: service
+      dockerfile: Dockerfile
+    ports:
+      - "33336:3000"
+    depends_on:
+      - database
+    restart: on-failure
+
+  database:
+    container_name: web-no-sqli-db
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: no_sqli
+      MYSQL_DATABASE: no_sqli
+      MYSQL_USER: no_sqli
+      MYSQL_PASSWORD: no_sqli

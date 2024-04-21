@@ -1,0 +1,22 @@
+author: Junhua
+category: Web
+connection_info: http://challs.nusgreyhats.org:33338
+description: 'I just learnt how to design my favourite `flask` webpage using `htmx`
+  and `bootstrap`.
+
+  I hope I don''t accidentally expose my super secret flag.
+
+
+  Author: Junhua'
+extra:
+  decay: 100
+  initial: 1000
+  minimum: 100
+files:
+- dist-baby-web.zip
+flags:
+- grey{0h_n0_mY_5up3r_53cr3t_4dm1n_fl4g}
+name: Baby Web
+state: visible
+type: dynamic
+value: 1000

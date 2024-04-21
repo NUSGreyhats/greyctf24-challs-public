@@ -1,0 +1,20 @@
+name: Cooking Mama
+author: kestryix
+category: Rev
+description: |-
+  im new to rust, so i cooked this :)
+
+  Author: kestryix
+value: 1000
+type: dynamic
+
+extra:
+  initial: 1000
+  decay: 100
+  minimum: 100
+
+flags:
+- grey{463127894512312397563654288975141789365397853764297241}
+
+files:
+- dist/dist-cooking_mama.zip

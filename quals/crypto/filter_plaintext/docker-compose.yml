@@ -1,0 +1,6 @@
+services:
+  challenge:
+    container_name: crypto-filter-plaintext
+    build: service
+    ports:
+      - 32223:5000

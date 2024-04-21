@@ -1,0 +1,23 @@
+name: Mazeware
+author: Elma
+category: Rev
+description: |-
+  finally... looks like a normal reversing challenge written in C... (or isit?)
+
+  ( ͡° ͜ʖ ͡°)
+
+
+  Author: Elma
+value: 1000
+type: dynamic
+
+extra:
+  initial: 1000
+  decay: 100
+  minimum: 100
+
+flags:
+- grey{h1dd3n_1n_pl41n51gh7_35ffcbede152a94e}
+
+files:
+- dist/dist-mazeware.zip

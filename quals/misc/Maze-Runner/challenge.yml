@@ -1,0 +1,18 @@
+author: jloh02
+category: Misc
+connection_info: nc challs.nusgreyhats.org 31112
+description: 'The maze trials were just the start. As a master of mazes, you find
+  yourself still confined in a maze. At least you''ve got some superpowers this time...
+
+
+  Author: jloh02'
+extra:
+  decay: 100
+  initial: 1000
+  minimum: 100
+flags:
+- grey{g1ad3rs_pha5erS_y0u_hAvE_jo1n3d_tH3_m4ze_eSc4p3rs!}
+name: Maze Runner
+state: visible
+type: dynamic
+value: 1000

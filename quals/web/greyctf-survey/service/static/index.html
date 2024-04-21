@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GreyCTF participant satisfaction survey</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.5.8/dist/vuetify.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.5.8/dist/vuetify.js"></script>
+</head>
+<body>
+  <div id="app">
+    <v-app dark>
+      <v-main>
+        <v-container class="content-container" fluid fill-height>
+          <v-row justify="center" align="center" class="h-100">
+            <v-col cols="12">
+              <v-card>
+                <v-card-title class="mb-4">GreyCTF participant satisfaction survey</v-card-title>
+                <v-card-text>
+                  <p class="text-center mt-4">Current Approval Rating: {{ approvalRating }}%</p>
+                  <v-slider
+                    v-model="sliderValue"
+                    :min="-100"
+                    :max="100"
+                    ticks="always"
+                    thumb-label
+                    :color="sliderColor"
+                    :track-color="sliderColor"
+                  >
+                    <template v-slot:prepend>
+                      <span class="label-left">It sucks</span>
+                    </template>
+                    <template v-slot:append>
+                      <span class="label-right">Best CTF ever</span>
+                    </template>
+                  </v-slider>
+                  <v-btn @click="submitVote" color="primary" class="mt-4">Submit Vote</v-btn>
+                </v-card-text>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-main>
+    </v-app>
+  </div>
+
+  <style>
+    .content-container {
+      max-width: 500px;
+    }
+    .label-left {
+      color: red;
+    }
+    .label-right {
+      color: green;
+    }
+    .h-100 {
+      height: 100%;
+    }
+  </style>
+
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify({
+        theme: {
+          dark: false,
+        },
+        typography: {
+          fontFamily: 'Montserrat'
+        }
+      }),
+      data() {
+        return {
+          sliderValue: 0,
+          approvalRating: 0
+        };
+      },
+      created() {
+        this.fetchApprovalRating();
+      },
+      computed: {
+        sliderColor() {
+          const percent = (this.sliderValue + 100) / 200;
+          const red = Math.round((1 - percent) * 255);
+          const green = Math.round(percent * 255);
+          return `rgb(${red},${green},0)`;
+        },
+      },
+      methods: {
+        async fetchApprovalRating() {
+          try {
+            const response = await fetch('/status');
+            const data = await response.json();
+            // Assuming the approval rating is in the 'data' property of the response
+            const approvalRating = data.data * 100; // Convert to percentage
+            this.approvalRating = approvalRating;
+            // Update slider value if needed
+            this.sliderValue = approvalRating;
+          } catch (error) {
+            console.error('Error fetching approval rating:', error);
+          }
+        },
+        async submitVote() {
+          try {
+            const voteValue = this.sliderValue / 100; // Convert slider value to between -1 and 1
+            const response = await fetch('/vote', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ vote: voteValue })
+            });
+            const responseData = await response.json();
+            if (responseData.data !== undefined) {
+              this.approvalRating = responseData.data * 100; // Update approval rating
+            }
+            if (responseData.msg !== undefined) {
+              alert(responseData.msg); // Show message to the user
+            }
+          } catch (error) {
+            console.error('Error submitting vote:', error);
+          }
+        },
+      },
+    });
+  </script>
+</body>
+</html>

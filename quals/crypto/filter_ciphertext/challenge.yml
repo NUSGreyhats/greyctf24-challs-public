@@ -1,0 +1,22 @@
+author: hadnot
+category: Crypto
+connection_info: nc challs.nusgreyhats.org 32222
+description: 'I rolled my own crypto. What could go wrong?
+
+
+  _This challenge unlocks 1 other cryptography challenge._
+
+
+  Author: hadnot'
+extra:
+  decay: 100
+  initial: 1000
+  minimum: 100
+files:
+- dist-filter_ciphertext.zip
+flags:
+- grey{00ps_n3v3r_m0d1fy_wh1l3_1t3r4t1ng}
+name: "Filter Ciphertext \u26D3\uFE0F"
+state: visible
+type: dynamic
+value: 1000

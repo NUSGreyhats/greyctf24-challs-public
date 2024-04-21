@@ -1,0 +1,22 @@
+name: Escrow
+author: MiloTruck
+category: Blockchain
+description: |-
+  Introducing NFT-based escrows - you can deposit assets and trade escrows by selling your ownership NFT!
+  However, I accidentally renounced ownership for my own escrow. Can you help me recover the funds?
+
+  Author: MiloTruck
+value: 1000
+type: dynamic
+
+extra:
+  initial: 1000
+  decay: 100
+  minimum: 100
+connection_info: nc challs.nusgreyhats.org 30101
+
+flags:
+- grey{cwia_bytes_overlap_5a392abcfa2d040a}
+
+files:
+- dist/dist-escrow.zip

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Register - CosmoCraft Collective</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <!-- Custom styles -->
+  <style>
+    /* Add your custom styles here */
+    body {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+
+        <form id="registrationForm" class="mt-5">
+          <h2 class="text-center mb-4">Welcome aboard!</h2>
+
+          <!-- Username Input -->
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" name="username" required>
+          </div>
+
+          <!-- Error Message Section -->
+          <div id="error-message" class="alert alert-danger d-none" role="alert">
+            Registration error. Please try again.
+          </div>
+
+          <!-- Submit Button -->
+          <button type="button" class="btn btn-primary btn-block" onclick="submitForm()">Register</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+  <!-- Custom JavaScript for handling form submission -->
+  <script>
+    async function submitForm() {
+      // Reset error message display
+      document.getElementById('error-message').classList.add('d-none');
+
+      // Get the username from the input field
+      var username = document.getElementById("username").value;
+
+      // Base64 encode the username
+      var base64Username = btoa(username);
+
+      // Create a URLSearchParams object to encode the form data
+      var formData = new URLSearchParams();
+      formData.append('username', base64Username);
+
+      // Make a POST request to the API endpoint
+      try {
+        const response = await fetch('/api/register/1', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: formData,
+        });
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        if (!data.err) {
+          console.log('Success:', data);
+          
+          // Redirect to /register2.html with the token in the query string
+          window.location.href = `/register2.html?token=${data.token}`;
+        } else {
+          console.error('Registration error');
+          // Display error message to the user
+          document.getElementById('error-message').classList.remove('d-none');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        // Handle other errors, e.g., display a generic error message to the user
+      }
+    }
+  </script>
+
+</body>
+</html>

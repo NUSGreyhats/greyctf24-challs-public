@@ -1,0 +1,18 @@
+author: jro
+category: Web
+connection_info: http://challs.nusgreyhats.org:33333
+description: "Rust is the most safest, fastest and bestest language to write web app!\n\
+  The code compiles, therefore it is impossible for bugs!\nPS: This is my first rust\
+  \ project (real) \U0001F980\U0001F980\U0001F980\U0001F980\U0001F980\n\nAuthor: jro"
+extra:
+  decay: 100
+  initial: 1000
+  minimum: 100
+files:
+- dist-fearless-concurrency.zip
+flags:
+- grey{ru57_c4n7_pr3v3n7_l061c_3rr0r5}
+name: Fearless Concurrency
+state: visible
+type: dynamic
+value: 1000

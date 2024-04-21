@@ -1,0 +1,8 @@
+services:
+  challenge:
+    container_name: pwn-heap-heap-heap
+    build: service
+    privileged: true
+    ports:
+        - 33456:5000
+

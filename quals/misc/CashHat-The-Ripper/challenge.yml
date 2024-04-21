@@ -1,0 +1,18 @@
+author: glendoodle
+category: Misc
+description: 'If only there was a way to crack password-protected zip files...
+
+
+  Author: glendoodle'
+extra:
+  decay: 100
+  initial: 1000
+  minimum: 100
+files:
+- dist-CashHat-The-Ripper.zip
+flags:
+- flag{W34k_P4ssw0rds_St4Nd_n0_Ch4nc3}
+name: Cashhat The Ripper
+state: visible
+type: dynamic
+value: 1000

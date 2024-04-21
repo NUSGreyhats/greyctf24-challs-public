@@ -1,0 +1,6 @@
+services:
+  crypto-prg:
+    build: ./service
+    ports:
+      - 35101:5000
+    privileged: true

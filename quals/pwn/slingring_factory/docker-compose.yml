@@ -1,0 +1,7 @@
+services:
+  challenge:
+    container_name: pwn-slingring-factory
+    build: service
+    privileged: true
+    ports:
+        - 35678:5000

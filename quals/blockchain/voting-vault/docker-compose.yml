@@ -1,0 +1,7 @@
+services:
+  challenge:
+    container_name: blockchain-voting-vault
+    build: ./service
+    ports:
+      - 30401:30401
+      - 30402:30402

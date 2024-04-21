@@ -1,0 +1,6 @@
+services:
+  crypto-aes:
+    build: ./service
+    ports:
+      - 35100:5000
+    privileged: true

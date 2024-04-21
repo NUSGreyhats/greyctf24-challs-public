@@ -1,0 +1,22 @@
+author: Heretic275
+category: Misc
+description: 'mp4 files are a good way to send hiden messages too!
+
+
+  @nus.greyhats
+
+
+  the md5 hash of the flag is `36ed337d208d4d58679cbb5047885236`
+
+
+  Author: Heretic275'
+extra:
+  decay: 100
+  initial: 1000
+  minimum: 100
+flags:
+- grey{y0uR_eYeS_aRe_5hArP}
+name: Out In Plain Sight
+state: visible
+type: dynamic
+value: 1000

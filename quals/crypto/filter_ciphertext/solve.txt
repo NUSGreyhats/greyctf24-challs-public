@@ -1,0 +1,3 @@
+soln = b"".join(secret_enc[i:i+16]*2 for i in range(0, len(secret_enc), 16))
+print(f"Solution: {soln.hex()}")
+assert(decrypt(soln) == secret)

@@ -1,0 +1,6 @@
+services:
+  challenge:
+    container_name: rev-phaserjs-tutorial
+    build: website
+    ports:
+        - 39876:8080

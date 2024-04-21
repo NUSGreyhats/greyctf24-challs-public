@@ -1,0 +1,6 @@
+services:
+  crypto-coding:
+    build: ./service
+    ports:
+      - 35103:5000
+    privileged: true

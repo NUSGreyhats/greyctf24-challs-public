@@ -1,0 +1,1 @@
+filter_plaintext should be locked behind filter_ciphertext

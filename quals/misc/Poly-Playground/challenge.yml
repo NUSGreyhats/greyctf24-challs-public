@@ -1,0 +1,18 @@
+author: jloh02
+category: Misc
+connection_info: nc challs.nusgreyhats.org 31113
+description: 'Magicians love to create things out of thin air. This time our secret
+  wizards have created a playground. Test out your wizardry here!
+
+
+  Author: jloh02'
+extra:
+  decay: 100
+  initial: 1000
+  minimum: 100
+flags:
+- grey{l0oks_lik3_sOm3one_c4n_b3_a_po1ynomia1_w1z4rd}
+name: Poly Playground
+state: visible
+type: dynamic
+value: 1000

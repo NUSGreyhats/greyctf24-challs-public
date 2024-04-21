@@ -1,0 +1,7 @@
+services:
+    challenge:
+      container_name: web-baby-web
+      build: service
+      ports:
+          - 33338:5000
+

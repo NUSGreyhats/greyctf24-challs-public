@@ -1,0 +1,7 @@
+{
+    "flag":"grey{fake_flag_for_testing}",
+    "host":"database",
+    "user":"no_sqli",
+    "password":"no_sqli",
+    "database": "no_sqli"
+}

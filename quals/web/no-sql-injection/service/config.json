@@ -1,0 +1,7 @@
+{
+    "flag":"grey{fr13nd5h1p_3nd3d_w17h_my5ql}",
+    "host":"database",
+    "user":"no_sqli",
+    "password":"no_sqli",
+    "database": "no_sqli"
+}

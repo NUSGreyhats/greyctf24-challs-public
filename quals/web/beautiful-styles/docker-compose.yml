@@ -1,0 +1,16 @@
+services:
+  challenge:
+    container_name: web-css-leak-app
+    build:
+      context: service/app
+      dockerfile: Dockerfile
+    ports:
+      - "33339:5000"
+  admin:
+    container_name: web-css-leak-admin
+    build:
+      context: service/admin
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      - FLAG=grey{X5S34RCH1fY0UC4NF1ND1T}

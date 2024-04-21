@@ -1,0 +1,20 @@
+name: AES
+category: Crypto
+description: |-
+  Timeout: 5 minutes
+
+  Author: mechfrog88
+value: 1000
+type: dynamic
+
+extra:
+  initial: 1000
+  decay: 100
+  minimum: 100
+connection_info: nc challs.nusgreyhats.org 35100
+
+flags:
+- grey{mix_column_is_important_in_AES_ExB3Hf9q9I3m}
+
+files:
+- dist/dist-aes.zip

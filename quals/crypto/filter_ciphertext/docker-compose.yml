@@ -1,0 +1,6 @@
+services:
+  challenge:
+    container_name: crypto-filter-ciphertext
+    build: service
+    ports:
+      - 32222:5000

@@ -1,0 +1,5 @@
+services:
+  verilog-ctf-server:
+    build: ./service
+    ports:
+      - "31114:5000"

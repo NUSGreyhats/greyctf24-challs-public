@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+  <h1>Baby Web</h1>
+  <div class="container">
+    <p>
+        This website is still under construction. I have completed only completed
+        the admin page where only I can access.
+    </p>
+    If you believe that you should be admin.
+    Please request for admin access below.
+  </div>
+  <div class="container">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Request for Admin Access
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" height="50%">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Guest</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="swap-target">
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">User:</label>
+                        <input type="text" class="form-control" id="recipient-name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Email:</label>
+                        <textarea class="form-control" id="message-text"></textarea>
+                    </div>
+                    <button hx-get="/rickroll" hx-swap-oob="outerHTML" hx-target="#swap-target" class="btn btn-secondary">
+                        Register
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+        </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

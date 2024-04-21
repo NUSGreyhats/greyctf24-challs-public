@@ -1,0 +1,17 @@
+author: jro
+category: Web
+connection_info: http://challs.nusgreyhats.org:33336
+description: "I asked My friend Jason to build me a new e-commerce website. We just\
+  \ finished the login system and there's already bugs \U0001F926\n\nAuthor: jro"
+extra:
+  decay: 100
+  initial: 1000
+  minimum: 100
+files:
+- dist-no-sql-injection.zip
+flags:
+- grey{fr13nd5h1p_3nd3d_w17h_my5ql}
+name: No Sql Injection
+state: visible
+type: dynamic
+value: 1000

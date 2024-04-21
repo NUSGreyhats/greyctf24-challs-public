@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Login</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <!-- Custom styles -->
+  <style>
+    /* Add your custom styles here */
+    body {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+
+        <form id="loginForm" class="mt-5">
+          <h2 class="text-center mb-4">Login</h2>
+
+          <!-- Username Input -->
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" name="username" required>
+          </div>
+
+          <!-- Password Input -->
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+          </div>
+
+          <!-- Error Message Section -->
+          <div id="error-message" class="alert alert-danger d-none" role="alert">
+            Login failed. Please check your username and password.
+          </div>
+
+          <!-- Success Message Section -->
+          <div id="success-message" class="alert alert-success d-none" role="alert">
+            <span id="success-msg"></span>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="button" class="btn btn-primary btn-block" onclick="submitForm()">Login</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+  <!-- Custom JavaScript for handling form submission -->
+  <script>
+    async function submitForm() {
+      // Reset error and success message display
+      document.getElementById('error-message').classList.add('d-none');
+      document.getElementById('success-message').classList.add('d-none');
+
+      // Get the username and password from the input fields
+      var username = document.getElementById("username").value;
+      var password = document.getElementById("password").value;
+
+      // Base64 encode the username and password
+      var base64Username = btoa(username);
+      var base64Password = btoa(password);
+
+      // Make a POST request to the API endpoint
+      try {
+        const response = await fetch('/api/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: `username=${base64Username}&password=${base64Password}`,
+        });
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        if (!data.err) {
+          console.log('Success:', data);
+
+          // Display success message
+          document.getElementById('success-msg').innerText = data.msg;
+          document.getElementById('success-message').classList.remove('d-none');
+        } else {
+          console.error('Login error');
+          // Display error message to the user
+          document.getElementById('error-message').classList.remove('d-none');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        // Handle other errors, e.g., display a generic error message to the user
+      }
+    }
+  </script>
+
+</body>
+</html>

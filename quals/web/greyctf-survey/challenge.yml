@@ -1,0 +1,20 @@
+author: jro
+category: Web
+connection_info: http://challs.nusgreyhats.org:33334
+description: 'Your honest feedback is appreciated :) (but if you give us a good rating
+  we''ll give you a flag)
+
+
+  Author: jro'
+extra:
+  decay: 100
+  initial: 1000
+  minimum: 100
+files:
+- dist-greyctf-survey.zip
+flags:
+- grey{50m371m35_4_l177l3_6035_4_l0n6_w4y}
+name: Greyctf Survey
+state: visible
+type: dynamic
+value: 1000

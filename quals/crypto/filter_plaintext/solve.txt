@@ -1,0 +1,5 @@
+to_send = bytes([0]*48) + secret_enc
+resp = decrypt(to_send)
+recovered_iv = resp[16:32]
+recovered = xor(resp[48:], xor(resp[:16], iv)*5)
+assert(recovered == secret)

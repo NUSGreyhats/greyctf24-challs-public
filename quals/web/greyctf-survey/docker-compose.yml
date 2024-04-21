@@ -1,0 +1,8 @@
+services:
+  chall:
+    container_name: web-greyctf-survey
+    build:
+      context: service
+      dockerfile: Dockerfile
+    ports:
+      - "33334:3000"

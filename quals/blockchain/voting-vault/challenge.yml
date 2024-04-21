@@ -1,0 +1,21 @@
+name: Voting Vault
+category: Blockchain
+description: |-
+  In the spirit of decentralization, GreyHats is now a DAO!
+  Vote with your GREY tokens to decide how our funds are spent.
+
+  Author: MiloTruck
+value: 1000
+type: dynamic
+
+extra:
+  initial: 1000
+  decay: 100
+  minimum: 100
+connection_info: nc challs.nusgreyhats.org 30401
+
+flags:
+- grey{rounding_is_dangerous_752aa6bb8b6a9f61}
+
+files:
+- dist/dist-voting-vault.zip

@@ -1,0 +1,7 @@
+services:
+  challenge:
+    build: ./service
+    container_name: blockchain-simple-amm-vault
+    ports:
+      - 30301:30301
+      - 30302:30302

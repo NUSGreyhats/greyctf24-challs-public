@@ -1,0 +1,4 @@
+.vscode/
+.ctf/
+dist-*.zip
+compile-time-regular-expressions-3.8.1/

@@ -1,0 +1,21 @@
+author: ocean
+category: Web
+connection_info: http://challs.nusgreyhats.org:33335
+description: 'I built this simple markdown parser. Please give me some feedback (in
+  markdown), I promise to read them all. Current features include: bold, italics,
+  code blocks with syntax highlighting!
+
+
+  Author: ocean'
+extra:
+  decay: 100
+  initial: 1000
+  minimum: 100
+files:
+- dist-markdown-parser.zip
+flags:
+- grey{m4rkd0wn_th1s_fl4g}
+name: Markdown Parser
+state: visible
+type: dynamic
+value: 1000

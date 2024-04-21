@@ -1,0 +1,21 @@
+name: Simple Amm Vault
+author: MiloTruck
+category: Blockchain
+description: |-
+  ERC-4626 was too complex, so I made an AMM to swap between shares and assets.
+
+  Author: MiloTruck
+value: 1000
+type: dynamic
+
+extra:
+  initial: 1000
+  decay: 100
+  minimum: 100
+connection_info: nc challs.nusgreyhats.org 30301
+
+flags:
+- grey{vault_reset_attack_a3e7a42b511cf0a8}
+
+files:
+- dist/dist-simple-amm-vault.zip

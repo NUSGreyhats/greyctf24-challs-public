@@ -1,0 +1,27 @@
+services:
+  app:
+    build:
+      context: service
+      dockerfile: Dockerfile
+    container_name: web-fearless-concurrency-app
+    ports:
+      - "33333:3000"
+    depends_on:
+      database:
+        condition: service_healthy
+    restart: on-failure
+
+  database:
+    image: mysql:latest
+    container_name: web-fearless-concurrency-db
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: fearless_concurrency
+      MYSQL_DATABASE: fearless_concurrency
+      MYSQL_USER: fearless_concurrency
+      MYSQL_PASSWORD: fearless_concurrency
+    healthcheck:
+      test: ["CMD-SHELL", 'mysqladmin ping']
+      interval: 10s
+      timeout: 2s
+      retries: 10

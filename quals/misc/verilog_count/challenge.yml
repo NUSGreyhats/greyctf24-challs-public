@@ -1,0 +1,19 @@
+author: Hackin7
+category: Misc
+connection_info: nc challs.nusgreyhats.org 31114
+description: 'I want to count from 0
+
+
+  Author: Hackin7'
+extra:
+  decay: 100
+  initial: 1000
+  minimum: 100
+files:
+- dist-verilog_count.zip
+flags:
+- grey{c0un71n6_w17h_4dd3r5}
+name: Verilog Count
+state: visible
+type: dynamic
+value: 1000

@@ -1,0 +1,7 @@
+services:
+  challenge:
+    container_name: misc-poly-playground
+    build: ./service
+    ports:
+      - 31113:5000
+    privileged: true

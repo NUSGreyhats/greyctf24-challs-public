@@ -1,0 +1,25 @@
+author: uhg
+category: Pwn
+connection_info: nc challs.nusgreyhats.org 35678
+description: 'In following Greycat''s adventures, you have stumbled upon a factory
+  that produces weirdly-shaped rings. Upon closer inspection, you realise that the
+  rings seem very familiar -- they looked exactly like the Sling Rings you saw from
+  the Marvel Comics universe! Having some time leftover, you decide to explore the
+  factory. Alas, you eventually come to realise that these Sling Rings were in fact
+  not the same as those you knew: during forging, their destinations have to already
+  be set. You wonder what you could do with these rings...
+
+
+  Author: uhg'
+extra:
+  decay: 100
+  initial: 1000
+  minimum: 100
+files:
+- dist-slingring_factory.zip
+flags:
+- grey{y0u_4r3_50rc3r3r_supr3m3_m45t3r_0f_th3_myst1c_4rts_mBRt!y4vz5ea@uq}
+name: Slingring Factory
+state: visible
+type: dynamic
+value: 1000

@@ -1,0 +1,19 @@
+author: jloh02
+category: Misc
+connection_info: nc challs.nusgreyhats.org 31111
+description: 'I''m always late for class but my prof told me that time is relative
+
+
+  Author: jloh02'
+extra:
+  decay: 100
+  initial: 1000
+  minimum: 100
+files:
+- dist-All-About-Timing.zip
+flags:
+- grey{t1m3_i5_a_s0c1al_coNstRucT}
+name: All About Timing
+state: visible
+type: dynamic
+value: 1000

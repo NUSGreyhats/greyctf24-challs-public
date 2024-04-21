@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if is_admin %}
+    <div class="container" role="doc-abstract">
+        <h2>Admin Page</h2>
+        <p>This website is still under construction. I have completed the admin page where only I can access.</p>
+        <p>Too bad my secret is not so easily given away</p>
+    </div>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" hidden>
+        Super Secret Admin Button
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Admin Modal</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Wow!, you found the super secret admin button.
+                <br />
+                <button hx-get="/flag" hx-swap="outerHTML" class="btn btn-secondary">
+                    Here is an even more secret button.
+                </button>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="alert alert-danger" role="alert">
+        You are not admin, you can't see the contents of this page.
+    </div>
+
+    {% endif %}
+{% endblock %}

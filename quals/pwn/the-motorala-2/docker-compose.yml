@@ -1,0 +1,7 @@
+services:
+  challenge:
+    container_name: pwn-the-motorala-2
+    build: service
+    read_only: true
+    ports:
+        - 30212:5000

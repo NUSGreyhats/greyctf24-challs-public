@@ -1,0 +1,6 @@
+services:
+  challenge:
+    container_name: misc-verilog-count
+    build: ./service
+    ports:
+      - "31114:5000"

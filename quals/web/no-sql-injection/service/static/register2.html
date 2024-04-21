@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Register - Step 2</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <!-- Custom styles -->
+  <style>
+    /* Add your custom styles here */
+    body {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+
+        <form id="registrationForm" class="mt-5">
+          <h2 class="text-center mb-4">One last step to secure your account</h2>
+
+          <!-- Password Input -->
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" required oninput="checkPasswordStrength()">
+          </div>
+
+          <!-- Password Strength Meter -->
+          <div id="password-strength-meter" class="progress mt-2 mb-3 d-none">
+            <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+
+          <!-- Password Strength Message -->
+          <div id="password-strength-message" class="mb-3"></div>
+
+
+          <!-- Error Message Section -->
+          <div id="error-message" class="alert alert-danger d-none" role="alert">
+            Registration error. Please try again.
+          </div>
+
+          <!-- Submit Button -->
+          <button type="button" class="btn btn-primary btn-block" onclick="submitForm()" disabled>Complete Registration</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+  <!-- Custom JavaScript for handling form submission and password strength check -->
+  <script>
+    async function submitForm() {
+      // Reset error message display
+      document.getElementById('error-message').classList.add('d-none');
+
+      // Get the password and token from the input fields
+      var password = document.getElementById("password").value;
+      var token = getQueryParam("token");
+
+      // Base64 encode the password and token
+      var base64Password = btoa(password);
+      var base64Token = btoa(token);
+
+      // Make a POST request to the API endpoint
+      try {
+        const response = await fetch('/api/register/2', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: `password=${base64Password}&token=${base64Token}`,
+        });
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        if (!data.err) {
+          alert("Success!");
+          location.href = "/login.html";
+        } else {
+          console.error('Registration error');
+          // Display error message to the user
+          document.getElementById('error-message').classList.remove('d-none');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        // Handle other errors, e.g., display a generic error message to the user
+      }
+    }
+
+    // Function to get query parameter from the URL
+    function getQueryParam(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
+    }
+
+    // Function to check password strength
+    function checkPasswordStrength() {
+      var password = document.getElementById("password").value;
+      var strengthMeter = document.getElementById("password-strength-meter");
+      var strengthMessage = document.getElementById("password-strength-message");
+      var submitButton = document.querySelector("button");
+
+      // Hide strength meter if the password is empty
+      if (!password.trim()) {
+        strengthMeter.classList.add('d-none');
+        submitButton.disabled = true;
+        return;
+      }
+
+      // Show strength meter
+      strengthMeter.classList.remove('d-none');
+
+      // Check password strength and update the meter and message accordingly
+      var strength = calculatePasswordStrength(password);
+      strengthMeter.querySelector(".progress-bar").style.width = strength + "%";
+
+      // Display strength message
+      displayStrengthMessage(strength, strengthMessage);
+
+      // Enable or disable the submit button based on password strength
+      submitButton.disabled = strength < 75;
+    }
+
+    // Function to calculate password strength
+    function calculatePasswordStrength(password) {
+      // You can implement your own logic to calculate the password strength
+      // For simplicity, let's use the password length as a basic indicator
+      var length = password.length;
+      return Math.min(length / 8 * 100, 100);
+    }
+
+    // Function to display strength message
+    function displayStrengthMessage(strength, messageElement) {
+      var message = "";
+
+      if (strength < 25) {
+        message = "Weak";
+      } else if (strength < 50) {
+        message = "Moderate";
+      } else if (strength < 75) {
+        message = "Strong";
+      } else {
+        message = "Very Strong";
+      }
+
+      messageElement.innerHTML = `<strong>Password Strength:</strong> ${message}`;
+    }
+  </script>
+
+</body>
+</html>

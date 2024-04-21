@@ -1,0 +1,19 @@
+author: jro
+category: Pwn
+connection_info: nc challs.nusgreyhats.org 31234
+description: 'With this new service, you can format your dates in any language
+
+
+  Author: jro'
+extra:
+  decay: 100
+  initial: 1000
+  minimum: 100
+files:
+- dist-baby-fmtstr.zip
+flags:
+- grey{17'5_b0f_71m3}
+name: Baby Fmtstr
+state: visible
+type: dynamic
+value: 1000

@@ -1,0 +1,7 @@
+services:
+  challenge:
+    container_name: pwn-the-motorala-1
+    build: service
+    privileged: true
+    ports:
+        - 30211:5000
