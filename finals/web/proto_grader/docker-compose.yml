@@ -1,0 +1,7 @@
+services:
+    challenge:
+      container_name: web-proto-grader
+      build: service
+      ports:
+          - 33337:8000
+

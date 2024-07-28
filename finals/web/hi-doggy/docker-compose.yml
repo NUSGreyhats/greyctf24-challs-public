@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+  hidoggy:
+    image: hidoggy
+    build:
+      context: service
+    environment:
+      NODE_ENV: production
+    ports:
+      - 33433:3000

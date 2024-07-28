@@ -1,0 +1,18 @@
+author: hadnot
+category: Crypto
+description: 'lol
+
+
+  Author: hadnot'
+extra:
+  decay: 15
+  initial: 1000
+  minimum: 200
+files:
+- dist-babyrsa.zip
+flags:
+- grey{3_equations_3_unknowns_just_use_groebnerXD}
+name: BabyRSA
+state: visible
+type: dynamic
+value: 1000

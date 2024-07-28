@@ -1,0 +1,19 @@
+author: ocean
+category: Web
+connection_info: http://challs.nusgreyhats.org:33335
+description: 'Classic flag shop challenge. Can you buy the flag?
+
+
+  Author: ocean'
+extra:
+  decay: 15
+  initial: 1000
+  minimum: 200
+files:
+- dist-flag_shop.zip
+flags:
+- grey{fl4g_4551gnm3nt_c0mpl3t3d}
+name: Flag Shop
+state: visible
+type: dynamic
+value: 1000

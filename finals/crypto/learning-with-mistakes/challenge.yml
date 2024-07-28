@@ -1,0 +1,19 @@
+author: JuliaPoo
+category: Crypto
+description: 'Original LWE use field GF(prime). TFHE use Mod(2^n). I use GF(2^n) so
+  that it''s still a field so obviously mine is gna be more secure lmao.
+
+
+  Author: JuliaPoo'
+extra:
+  decay: 15
+  initial: 1000
+  minimum: 200
+files:
+- dist-learning-with-mistakes.zip
+flags:
+- grey{I'm_flyin_soon_I'm-_rushing-this-challenge-rn-ajsdadsdasks}
+name: Learning With Mistakes
+state: visible
+type: dynamic
+value: 1000

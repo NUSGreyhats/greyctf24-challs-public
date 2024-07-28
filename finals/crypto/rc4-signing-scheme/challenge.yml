@@ -1,0 +1,19 @@
+author: hadnot
+category: Crypto
+connection_info: nc challs.nusgreyhats.org 32001
+description: '1024-bit (secure!) signing algorithm with RC4 (fast!)
+
+
+  Author: hadnot'
+extra:
+  decay: 15
+  initial: 1000
+  minimum: 200
+files:
+- dist-rc4-signing-scheme.zip
+flags:
+- grey{rc4_more_like_rcgone_amirite_q20v498n20}
+name: Rc4 Signing Scheme
+state: visible
+type: dynamic
+value: 1000

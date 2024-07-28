@@ -1,0 +1,10 @@
+version: '3'
+services:
+  app:
+    build: service
+    ports:
+      - 33335:33335
+    environment:
+      - NODE_ENV=development
+      - FLAG=grey{fl4g_4551gnm3nt_c0mpl3t3d}
+      - SECRET=randomgibberishthatcantbeguessed

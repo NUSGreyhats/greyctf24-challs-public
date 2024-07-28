@@ -1,0 +1,20 @@
+author: hadnot
+category: Crypto
+connection_info: nc challs.nusgreyhats.org 32000
+description: 'I came up with a new HMAC algorithm. How has no one thought of this
+  before?
+
+
+  Author: hadnot'
+extra:
+  decay: 15
+  initial: 1000
+  minimum: 200
+files:
+- dist-hmac-crc.zip
+flags:
+- grey{everything_is_linear_algebra_a0945v832q}
+name: HMAC-CRC
+state: visible
+type: dynamic
+value: 1000

@@ -1,0 +1,17 @@
+author: Hackin7
+category: Hardware
+description: 'So you need the flag to bootloader, but you need the bootloader to flag?
+  Challenge 5.
+
+
+  Author: Hackin7'
+extra:
+  decay: 15
+  initial: 1000
+  minimum: 200
+flags:
+- grey{what_flag_just_boot1_bro}
+name: Bootloader
+state: visible
+type: dynamic
+value: 1000

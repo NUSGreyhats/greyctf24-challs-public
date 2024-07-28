@@ -1,0 +1,7 @@
+services:
+  relife:
+    container_name: pwn-overly-simplified-pwn-challenge
+    build: ./service
+    privileged: true
+    ports:
+      - 35123:5000

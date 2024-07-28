@@ -1,0 +1,16 @@
+author: Elma
+category: Misc
+description: 'sorry not sorry for making this XD
+
+
+  Author: Elma'
+extra:
+  decay: 15
+  initial: 1000
+  minimum: 200
+flags:
+- grey{im_so_sorry_for_coming_up_with_this_challenge}
+name: Discord Insanity Check
+state: visible
+type: dynamic
+value: 1000

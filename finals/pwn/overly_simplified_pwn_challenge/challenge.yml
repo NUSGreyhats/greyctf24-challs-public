@@ -1,0 +1,23 @@
+author: Elma
+category: Pwn
+connection_info: nc challs.nusgreyhats.org 35123
+description: 'Writing challenges are too hard... so I wrote a program in 2 lines of
+  code for you to pwn :/
+
+  I can even tell you that there is an obvious buffer overflow there, should be simple
+  right?
+
+
+  Author: Elma'
+extra:
+  decay: 15
+  initial: 1000
+  minimum: 200
+files:
+- dist-overly_simplified_pwn_challenge.zip
+flags:
+- grey{i_actually_understand_ret2dlresolve}
+name: Overly Simplified Pwn Challenge
+state: visible
+type: dynamic
+value: 1000

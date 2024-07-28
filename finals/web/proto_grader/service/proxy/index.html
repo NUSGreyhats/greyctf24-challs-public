@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proto Grader</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .quiz-container {
+            text-align: left;
+            max-width: 500px; /* Adjust the max-width as needed */
+            width: 100%;
+            margin: auto;
+        }
+
+        .title {
+            margin-top: 0;
+        }
+
+        .question {
+            margin-bottom: 1em;
+        }
+
+        .answer-container {
+            display: flex;
+            gap: 1em;
+            align-items: center; /* Vertically center the items */
+        }
+
+        .submit-button {
+            margin-top: 0; /* Adjust the margin as needed */
+        }
+
+        .result-container {
+            margin-top: 1em;
+            display: none; /* Initially hide the result container */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container quiz-container">
+    <h1 class="title">Proto Grader</h1>
+    <div id="quiz-question" class="mt-4 question">
+        <h4>What is the flag?</h4>
+    </div>
+    <div class="answer-container">
+        <input type="text" id="answer" class="form-control" placeholder="Your answer" onkeydown="if(event.keyCode==13) submitAnswer()">
+        <button class="btn btn-primary submit-button" onclick="submitAnswer()">Submit</button>
+    </div>
+    <div id="result" class="result-container mt-3">
+        <!-- Result will be displayed here -->
+    </div>
+</div>
+
+<!-- Bootstrap JS and Popper.js -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+
+    document.getElementById('answer').addEventListener('input', function() {
+        // Hide the result box
+        hideResult();
+    });
+
+    function submitAnswer() {
+        // Get the user's answer
+        var answer = document.getElementById('answer').value;
+
+        // Hex encode the answer
+        var hexEncodedAnswer = stringToHex(answer);
+
+        // Send a POST request to /grade with the hex-encoded answer in the JSON body
+        fetch('/grade', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ input: hexEncodedAnswer }),
+        })
+        .then(response => response.text())
+        .then(data => {
+            // Display the result
+            displayResult(data, !data.includes("{"));
+        })
+        .catch(error => {
+            // Display error if there is an issue with the API call
+            displayResult(`Error: ${error}`, true);
+        });
+    }
+
+    function displayResult(result, isError = false) {
+        // Display the result container
+        var resultContainer = document.getElementById('result');
+        resultContainer.style.display = 'block';
+
+        // Determine the alert class based on whether it's an error or success
+        var alertClass = isError ? 'alert-danger' : 'alert-success';
+        resultContainer.innerHTML = `<div class="alert ${alertClass}" role="alert">${result}</div>`;
+    }
+    
+    function hideResult() {
+        // Hide the result container
+        var resultContainer = document.getElementById('result');
+        resultContainer.style.display = 'none';
+    }
+
+    // Function to convert a string to hex
+    function stringToHex(str) {
+        var hex = '';
+        for(var i=0; i<str.length; i++) {
+            hex += ''+str.charCodeAt(i).toString(16);
+        }
+        return hex;
+    }
+</script>
+
+</body>
+</html>

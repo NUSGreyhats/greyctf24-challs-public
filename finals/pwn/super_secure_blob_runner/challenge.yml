@@ -1,0 +1,20 @@
+author: Elma
+category: Pwn
+connection_info: nc challs.nusgreyhats.org 34568
+description: 'Everyone rekt the Blob Runner so hard in Greyhats Welcome CTF 2023,
+  I made sure to make it extra secure this time ;)
+
+
+  Author: Elma'
+extra:
+  decay: 15
+  initial: 1000
+  minimum: 200
+files:
+- dist-super_secure_blob_runner.zip
+flags:
+- grey{ret_to_thread_local_storage_via_fs_register}
+name: Super Secure Blob Runner
+state: visible
+type: dynamic
+value: 1000

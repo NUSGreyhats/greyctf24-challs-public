@@ -1,0 +1,20 @@
+author: MiloTruck
+category: Blockchain
+connection_info: nc challs.nusgreyhats.org 33325
+description: 'A simple staking vault that allows flashloans and meta-transactions
+  exists. Can you drain its funds?
+
+
+  Author: MiloTruck'
+extra:
+  decay: 15
+  initial: 1000
+  minimum: 200
+files:
+- dist-meta-staking.zip
+flags:
+- grey{erc2771_multicall_address_spoofing_bug}
+name: Meta Staking
+state: visible
+type: dynamic
+value: 1000

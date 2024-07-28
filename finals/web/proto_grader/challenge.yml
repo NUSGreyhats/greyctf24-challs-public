@@ -1,0 +1,20 @@
+author: jro
+category: Web
+connection_info: http://challs.nusgreyhats.org:33337
+description: 'Here''s a website to check if you''ve got the right flag! It''s just
+  a prototype at the moment, I hope it doesn''t break!
+
+
+  Author: jro'
+extra:
+  decay: 15
+  initial: 1000
+  minimum: 200
+files:
+- dist-proto_grader.zip
+flags:
+- grey{n0d3j5_3v3ry7h1n6_p0llu710n}
+name: Proto Grader
+state: visible
+type: dynamic
+value: 1000

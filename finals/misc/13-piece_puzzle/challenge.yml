@@ -1,0 +1,18 @@
+author: JuliaPoo
+category: Misc
+description: 'A puzzle of a lifetime.
+
+
+  Author: JuliaPoo'
+extra:
+  decay: 15
+  initial: 1000
+  minimum: 200
+files:
+- dist-13-piece_puzzle.zip
+flags:
+- grey{ffd26ed19381530cd0484ec1d32e0188d8801208a942a966043bb492b23c6f92}
+name: 13 Piece Puzzle
+state: visible
+type: dynamic
+value: 1000

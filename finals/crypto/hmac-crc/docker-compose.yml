@@ -1,0 +1,7 @@
+services:
+    challenge:
+      container_name: crypto-hmac-crc
+      build: service
+      ports:
+          - 32000:5000
+

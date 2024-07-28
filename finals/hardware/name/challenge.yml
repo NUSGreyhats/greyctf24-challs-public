@@ -1,0 +1,17 @@
+author: Hackin7
+category: Hardware
+description: 'GreyCat has an onboard screen where it can communicate with others.
+  Hmm I wonder if there''s some special format? Challenge 3.
+
+
+  Author: Hackin7'
+extra:
+  decay: 15
+  initial: 1000
+  minimum: 200
+flags:
+- grey{you_can_printf_on_stm32?}
+name: Name
+state: visible
+type: dynamic
+value: 1000

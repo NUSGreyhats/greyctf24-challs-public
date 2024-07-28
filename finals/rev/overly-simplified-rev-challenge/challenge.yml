@@ -1,0 +1,29 @@
+author: Elma
+category: Rev
+description: 'Your usual reverse-engineering challenge. I even made this program so
+  simple that:
+
+  1. There are no functions
+
+  2. There are no "mov" instructions
+
+  3. I deleted the stack
+
+  4. I deleted your sanity
+
+  Hope you enjoy this simple binary! GOOD LUCK HAVE FUN XDXDXD
+
+
+  Author: Elma'
+extra:
+  decay: 15
+  initial: 1000
+  minimum: 200
+files:
+- dist-overly-simplified-rev-challenge.zip
+flags:
+- grey{wasnt_that_fun_and_easy_XDXDXDXDXD}
+name: Overly Simplified Rev Challenge
+state: visible
+type: dynamic
+value: 1000

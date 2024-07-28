@@ -1,0 +1,17 @@
+author: jro
+category: Rev
+description: "Look at the stars  \nCan you make them shine for you?\n```shell\n$ cat\
+  \ flag.txt | ./dist/stars                      \n3082d99f70d36a8f0aad4d95e47c22e6ec9ec0bbc8afd372651a29\n\
+  ```\n\nAuthor: jro"
+extra:
+  decay: 15
+  initial: 1000
+  minimum: 200
+files:
+- dist-a-sky-full-of-stars.zip
+flags:
+- grey{5uch_4_h34v3nly_v13w}
+name: A Sky Full of Stars
+state: visible
+type: dynamic
+value: 1000

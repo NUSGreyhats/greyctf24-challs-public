@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Election Results</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5 mb-4">Election Results</h1>
+        <div id="chartContainer">
+            <canvas id="myChart" width="400" height="400"></canvas>
+        </div>
+    </div>
+
+    <script>
+        // Get data from Flask variable
+        var votes = {{ votes|tojson }};
+
+        // Calculate total votes
+        var totalVotes = Object.values(votes).reduce((acc, curr) => acc + curr, 0);
+
+        if (totalVotes === 0) {
+            // Display no votes message
+            document.getElementById('chartContainer').innerHTML = "<p>No votes cast yet.</p>";
+        } else {
+            // Extract candidate names and vote counts
+            var candidates = Object.keys(votes);
+            var voteCounts = Object.values(votes);
+
+            // Define extended Matplotlib's default color range
+            var matplotlibColors = [
+                '#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', 
+                '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf', 
+                '#aec7e8', '#ffbb78', '#98df8a', '#ff9896', '#c5b0d5', 
+                '#c49c94', '#f7b6d2', '#c7c7c7', '#dbdb8d', '#9edae5'
+            ];
+
+            // Create pie chart with extended Matplotlib's default color range
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: candidates,
+                    datasets: [{
+                        data: voteCounts,
+                        backgroundColor: matplotlibColors
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    legend: {
+                        position: 'bottom',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Election Results'
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+services:
+    challenge:
+      container_name: web-greyctf-survey-real
+      build: service
+      ports:
+          - 33340:8000
+

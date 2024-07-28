@@ -1,0 +1,6 @@
+services:
+  challenge:
+    build: ./service
+    ports:
+      - 33321:33321
+      - 33322:33322

@@ -1,0 +1,17 @@
+author: Hackin7
+category: Hardware
+description: 'GreyCat has an existential crisis. Join it on it''s journey of self
+  discovery! Challenge 1.
+
+
+  Author: Hackin7'
+extra:
+  decay: 15
+  initial: 1000
+  minimum: 200
+flags:
+- grey{STM32_ExP3R1}
+name: Hornet 9 Hw
+state: visible
+type: dynamic
+value: 1000

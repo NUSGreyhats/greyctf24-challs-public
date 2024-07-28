@@ -1,0 +1,20 @@
+author: jro
+category: Pwn
+connection_info: nc challs.nusgreyhats.org 34567
+description: 'If strcat exists why not memcat? or even memecat?? (Adapted from failed
+  CS1010 exercise)
+
+
+  Author: jro'
+extra:
+  decay: 15
+  initial: 1000
+  minimum: 200
+files:
+- dist-meme-cat.zip
+flags:
+- grey{f4k3_chunk_17_71l_y0u_m4k3_17}
+name: Meme Cat
+state: visible
+type: dynamic
+value: 1000

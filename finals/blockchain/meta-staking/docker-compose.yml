@@ -1,0 +1,6 @@
+services:
+  meta-staking:
+    build: ./service
+    ports:
+      - 33325:33325
+      - 33326:33326

@@ -1,0 +1,20 @@
+author: jro
+category: Rev
+description: "Oh no! One of our services got hacked, and the attackers encrypted the\
+  \ flag!  \nLuckily, our incident response team managed to obtain a packet capture\
+  \ of the attack in progress. Can you recover the flag?\n> PS: the attacker is on\
+  \ `[::1]:43064` and the service is on `[::1]:1338`  \nPPS: ignore any wireshark\
+  \ errors about checksums  \nPPPS: pretend that the attacker is not attacking from\
+  \ localhost (I'm too lazy to setup a network for this)\n\nAuthor: jro"
+extra:
+  decay: 15
+  initial: 1000
+  minimum: 200
+files:
+- dist-ransomware.zip
+flags:
+- grey{r4n50m_m0r3_l1k3_r4nd0m_XD}
+name: Ransomware
+state: visible
+type: dynamic
+value: 1000

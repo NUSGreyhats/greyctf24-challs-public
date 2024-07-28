@@ -1,0 +1,17 @@
+author: Hackin7
+category: Hardware
+description: 'GreyCat has a Serialous message. Help us find out what it means. Challenge
+  4.
+
+
+  Author: Hackin7'
+extra:
+  decay: 15
+  initial: 1000
+  minimum: 200
+flags:
+- grey{STM32_ExP3R1}
+name: Serialous
+state: visible
+type: dynamic
+value: 1000

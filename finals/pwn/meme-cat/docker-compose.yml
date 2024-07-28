@@ -1,0 +1,8 @@
+services:
+  challenge:
+    container_name: pwn-meme-cat
+    build: service
+    privileged: true
+    ports:
+        - 34567:5000
+

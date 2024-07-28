@@ -1,0 +1,18 @@
+author: Elma
+category: Rev
+description: 'The truth will prevail, when the hell''s gate opens and reveals itself.
+
+
+  Author: Elma'
+extra:
+  decay: 15
+  initial: 1000
+  minimum: 200
+files:
+- dist-hungry-ghost-festival.zip
+flags:
+- grey{tr1ppy_4ss_r3v3rs1ng_ch4ll3ngexd}
+name: Hungry Ghost Festival
+state: visible
+type: dynamic
+value: 1000

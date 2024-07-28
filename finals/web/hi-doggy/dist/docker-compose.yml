@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  hidoggy:
+    image: hidoggy
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3000:3000

@@ -1,0 +1,7 @@
+services:
+  super-secure-blob-runner:
+    container_name: pwn-super-secure-blob-runner
+    build: ./service
+    read_only: true
+    ports:
+      - 34568:5000

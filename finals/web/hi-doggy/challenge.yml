@@ -1,0 +1,21 @@
+author: devesh
+category: Web
+connection_info: http://challs.nusgreyhats.org:33433
+description: 'I figured out the best defence against SSTI, just remove the stuff that
+  can execute code from the template! I even used a whitelist like the pros tell you
+  to do!
+
+
+  Author: devesh'
+extra:
+  decay: 15
+  initial: 1000
+  minimum: 200
+files:
+- dist-hi-doggy.zip
+flags:
+- grey{I_cAn'T_THInK_0F_AnytHing_clever_T0_pu7_h3r3}
+name: Hi Doggy
+state: visible
+type: dynamic
+value: 1000

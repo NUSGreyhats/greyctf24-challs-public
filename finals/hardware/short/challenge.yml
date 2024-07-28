@@ -1,0 +1,16 @@
+author: Hackin7
+category: Hardware
+description: 'GreyCat is short. Help it short something! Challenge 2.
+
+
+  Author: Hackin7'
+extra:
+  decay: 15
+  initial: 1000
+  minimum: 200
+flags:
+- grey{d3Bu9_P4D5}
+name: Short
+state: visible
+type: dynamic
+value: 1000

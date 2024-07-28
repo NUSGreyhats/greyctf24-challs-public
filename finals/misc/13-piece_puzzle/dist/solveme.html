@@ -1,0 +1,419 @@
+<script src="https://www.unpkg.com/drag-drop-touch@1.3.1/DragDropTouch.js"></script>
+<style>
+.region {
+  width: 100%;
+  height: 100%;
+  /* border: 2px solid black; */
+  box-sizing: border-box;
+}
+
+.piece-box-white {
+  background-color: coral;
+}
+
+.piece-box-black {
+  background-color: chocolate;
+}
+
+.piece-box {
+  position: relative;
+  z-index: 100;
+}
+
+.piece-part {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  box-shadow: 10px 10px 10px rgba(109, 28, 28, 0.5);
+  pointer-events: none;
+}
+
+.piece-pin {
+  cursor: move;
+  position: relative;
+  z-index: 100;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.piece-pin:hover > .piece-part {
+  opacity: 0.5;
+}
+
+.piece-pin:after {
+  position: absolute;
+  content: "";
+  border: 10px solid beige;
+  border-radius: 10px;
+  left: calc(50% - 10px);
+  top: calc(50% - 10px);
+  z-index: 101;
+}
+
+.board-box {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+}
+
+.board-box-white {
+  background-color: beige;
+}
+
+.board-box-black {
+  background-color: bisque;
+}
+
+#board {
+  aspect-ratio: 1 / 1;
+  width: calc(min(70%, 400px));
+  background-color: brown;
+  padding: 20px;
+
+  display: grid;
+  grid-template-columns: calc(100%/8) calc(100%/8) calc(100%/8) calc(100%/8) calc(100%/8) calc(100%/8) calc(100%/8) calc(100%/8);
+  grid-template-rows: calc(100%/8) calc(100%/8) calc(100%/8) calc(100%/8) calc(100%/8) calc(100%/8) calc(100%/8) calc(100%/8);
+}
+
+#board-space {
+  grid-column: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.piece-home {
+  margin: 1em;
+  border: 3px black dotted;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+}
+
+#piece-space {
+  grid-column: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+}
+
+#instructions {
+  text-align: center;
+  max-width: calc(min(70%, 400px));
+  margin-bottom: 1em;
+}
+
+#output-msg {
+  text-align: center;
+  max-width: calc(min(70%, 400px));
+  max-height: 5em;
+  min-height: 3em;
+  height: auto;
+  background-color:azure;
+  box-shadow: inset 0 0 10px rgba(109, 28, 28, 0.5);
+  padding: 0.5em;
+  word-break: break-all;
+}
+
+#solutions-found {
+  text-align: center;
+  max-width: calc(min(70%, 400px));
+  max-height: 10em; 
+  min-height: 3em;
+  height: auto;
+  background-color: beige;
+  margin-bottom: 1em;
+  box-shadow: inset 0 0 10px rgba(109, 28, 28, 0.5);
+  padding: 0.5em;
+
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+
+  overflow-y: auto;
+}
+
+#solution-counter:after {
+  content: " / 340";
+}
+
+.solution-record {
+  max-width: 100%;
+  word-break: break-all;
+  padding: 0.5em;
+  margin-bottom: 0.3em;
+  background-color: antiquewhite;
+  box-shadow: inset 0 0 10px rgba(109, 28, 28, 0.5);
+}
+
+.solution-record:hover {
+  background-color: aquamarine;
+  cursor: pointer;
+}
+
+#game {
+  position: absolute; 
+  left: 0; 
+  right: 0; 
+  top: 0;
+  bottom: 0;
+  margin: auto;
+
+  display: grid;
+  grid-template-columns: 40% auto;
+}
+
+body {
+    background-color: bisque;
+}
+
+/* html, body {margin: 0; height: 100%; overflow: hidden} */
+</style>
+
+<script>
+
+// (pieceid: (rotid: ...(y,x,(..dont_draw_border))))
+const BORDER_STYLE = "2px solid white";
+const BORDER_ARR = ["top", "bottom", "left", "right"];
+const PIECE_INFO = [[[[[0, 0], ['bottom', 'right']], [[0, 1], ['bottom', 'left']], [[1, 0], ['top', 'right']], [[1, 1], ['top', 'left']]], [[[0, -1], ['bottom', 'right']], [[0, 0], ['bottom', 'left']], [[1, -1], ['top', 'right']], [[1, 0], ['top', 'left']]]], [[[[0, 0], ['bottom', 'right']], [[0, 1], ['left', 'right']], [[0, 2], ['bottom', 'left']], [[1, 0], ['top']], [[1, 2], ['top']]], [[[-2, 0], ['bottom', 'right']], [[-2, 1], ['left']], [[-1, 0], ['top', 'bottom']], [[0, 0], ['top', 'right']], [[0, 1], ['left']]], [[[-2, -1], ['right']], [[-2, 0], ['bottom', 'left']], [[-1, 0], ['top', 'bottom']], [[0, -1], ['right']], [[0, 0], ['top', 'left']]], [[[-1, -2], ['bottom']], [[-1, 0], ['bottom']], [[0, -2], ['top', 'right']], [[0, -1], ['left', 'right']], [[0, 0], ['top', 'left']]]], [[[[0, 0], ['bottom']], [[1, -1], ['right']], [[1, 0], ['top', 'bottom', 'left', 'right']], [[1, 1], ['left']], [[2, 0], ['top']]]], [[[[0, -1], ['bottom', 'right']], [[0, 0], ['bottom', 'left', 'right']], [[0, 1], ['left']], [[1, -1], ['top', 'right']], [[1, 0], ['top', 'left']]], [[[0, -1], ['right']], [[0, 0], ['bottom', 'left', 'right']], [[0, 1], ['bottom', 'left']], [[1, 0], ['top', 'right']], [[1, 1], ['top', 'left']]], [[[-1, 0], ['bottom']], [[0, 0], ['top', 'bottom', 'right']], [[0, 1], ['bottom', 'left']], [[1, 0], ['top', 'right']], [[1, 1], ['top', 'left']]], [[[-1, 0], ['bottom']], [[0, -1], ['bottom', 'right']], [[0, 0], ['top', 'bottom', 'left']], [[1, -1], ['top', 'right']], [[1, 0], ['top', 'left']]], [[[-1, 0], ['bottom', 'right']], [[-1, 1], ['bottom', 'left']], [[0, -1], ['right']], [[0, 0], ['top', 'left', 'right']], [[0, 1], ['top', 'left']]], [[[-1, -1], ['bottom', 'right']], [[-1, 0], ['bottom', 'left']], [[0, -1], ['top', 'right']], [[0, 0], ['top', 'left', 'right']], [[0, 1], ['left']]], [[[-1, -1], ['bottom', 'right']], [[-1, 0], ['bottom', 'left']], [[0, -1], ['top', 'right']], [[0, 0], ['top', 'bottom', 'left']], [[1, 0], ['top']]], [[[-1, 0], ['bottom', 'right']], [[-1, 1], ['bottom', 'left']], [[0, 0], ['top', 'bottom', 'right']], [[0, 1], ['top', 'left']], [[1, 0], ['top']]]], [[[[-2, 1], ['bottom']], [[-1, 1], ['top', 'bottom']], [[0, 0], ['bottom', 'right']], [[0, 1], ['top', 'left']], [[1, 0], ['top']]], [[[-2, -1], ['bottom']], [[-1, -1], ['top', 'bottom']], [[0, -1], ['top', 'right']], [[0, 0], ['bottom', 'left']], [[1, 0], ['top']]], [[[-1, -2], ['right']], [[-1, -1], ['left', 'right']], [[-1, 0], ['bottom', 'left']], [[0, 0], ['top', 'right']], [[0, 1], ['left']]], [[[-1, 0], ['bottom', 'right']], [[-1, 1], ['left', 'right']], [[-1, 2], ['left']], [[0, -1], ['right']], [[0, 0], ['top', 'left']]], [[[-1, 0], ['bottom']], [[0, -1], ['bottom', 'right']], [[0, 0], ['top', 'left']], [[1, -1], ['top', 'bottom']], [[2, -1], ['top']]], [[[-1, 0], ['bottom']], [[0, 0], ['top', 'right']], [[0, 1], ['bottom', 'left']], [[1, 1], ['top', 'bottom']], [[2, 1], ['top']]], [[[0, -1], ['right']], [[0, 0], ['bottom', 'left']], [[1, 0], ['top', 'right']], [[1, 1], ['left', 'right']], [[1, 2], ['left']]], [[[0, 0], ['bottom', 'right']], [[0, 1], ['left']], [[1, -2], ['right']], [[1, -1], ['left', 'right']], [[1, 0], ['top', 'left']]]], [[[[0, -1], ['right']], [[0, 0], ['left', 'right']], [[0, 1], ['left', 'right']], [[0, 2], ['left', 'right']], [[0, 3], ['left']]], [[[-3, 0], ['bottom']], [[-2, 0], ['top', 'bottom']], [[-1, 0], ['top', 'bottom']], [[0, 0], ['top', 'bottom']], [[1, 0], ['top']]]], [[[[-1, 1], ['bottom']], [[0, -1], ['right']], [[0, 0], ['left', 'right']], [[0, 1], ['top', 'left', 'right']], [[0, 2], ['left']]], [[[-1, -1], ['bottom']], [[0, -2], ['right']], [[0, -1], ['top', 'left', 'right']], [[0, 0], ['left', 'right']], [[0, 1], ['left']]], [[[-2, 0], ['bottom']], [[-1, -1], ['right']], [[-1, 0], ['top', 'bottom', 'left']], [[0, 0], ['top', 'bottom']], [[1, 0], ['top']]], [[[-2, 0], ['bottom']], [[-1, 0], ['top', 'bottom', 'right']], [[-1, 1], ['left']], [[0, 0], ['top', 'bottom']], [[1, 0], ['top']]], [[[0, -2], ['right']], [[0, -1], ['bottom', 'left', 'right']], [[0, 0], ['left', 'right']], [[0, 1], ['left']], [[1, -1], ['top']]], [[[0, -1], ['right']], [[0, 0], ['left', 'right']], [[0, 1], ['bottom', 'left', 'right']], [[0, 2], ['left']], [[1, 1], ['top']]], [[[-1, 0], ['bottom']], [[0, 0], ['top', 'bottom']], [[1, 0], ['top', 'bottom', 'right']], [[1, 1], ['left']], [[2, 0], ['top']]], [[[-1, 0], ['bottom']], [[0, 0], ['top', 'bottom']], [[1, -1], ['right']], [[1, 0], ['top', 'bottom', 'left']], [[2, 0], ['top']]]], [[[[-1, 0], ['bottom']], [[0, 0], ['top', 'bottom', 'right']], [[0, 1], ['left', 'right']], [[0, 2], ['left']], [[1, 0], ['top']]], [[[-1, 0], ['bottom']], [[0, -2], ['right']], [[0, -1], ['left', 'right']], [[0, 0], ['top', 'bottom', 'left']], [[1, 0], ['top']]], [[[-2, 0], ['bottom']], [[-1, 0], ['top', 'bottom']], [[0, -1], ['right']], [[0, 0], ['top', 'left', 'right']], [[0, 1], ['left']]], [[[0, -1], ['right']], [[0, 0], ['bottom', 'left', 'right']], [[0, 1], ['left']], [[1, 0], ['top', 'bottom']], [[2, 0], ['top']]]], [[[[0, 0], ['bottom', 'right']], [[0, 1], ['left']], [[1, -1], ['bottom', 'right']], [[1, 0], ['top', 'left']], [[2, -1], ['top']]], [[[0, -1], ['right']], [[0, 0], ['bottom', 'left']], [[1, 0], ['top', 'right']], [[1, 1], ['bottom', 'left']], [[2, 1], ['top']]], [[[-1, 0], ['bottom']], [[0, 0], ['top', 'right']], [[0, 1], ['bottom', 'left']], [[1, 1], ['top', 'right']], [[1, 2], ['left']]], [[[-1, 0], ['bottom']], [[0, -1], ['bottom', 'right']], [[0, 0], ['top', 'left']], [[1, -2], ['right']], [[1, -1], ['top', 'left']]]], [[[[-1, -1], ['right']], [[-1, 0], ['bottom', 'left']], [[0, 0], ['top', 'bottom']], [[1, 0], ['top', 'right']], [[1, 1], ['left']]], [[[-1, 0], ['bottom', 'right']], [[-1, 1], ['left']], [[0, 0], ['top', 'bottom']], [[1, -1], ['right']], [[1, 0], ['top', 'left']]], [[[-1, 1], ['bottom']], [[0, -1], ['bottom', 'right']], [[0, 0], ['left', 'right']], [[0, 1], ['top', 'left']], [[1, -1], ['top']]], [[[-1, -1], ['bottom']], [[0, -1], ['top', 'right']], [[0, 0], ['left', 'right']], [[0, 1], ['bottom', 'left']], [[1, 1], ['top']]]], [[[[-2, 0], ['bottom']], [[-1, 0], ['top', 'bottom']], [[0, -2], ['right']], [[0, -1], ['left', 'right']], [[0, 0], ['top', 'left']]], [[[-2, 0], ['bottom']], [[-1, 0], ['top', 'bottom']], [[0, 0], ['top', 'right']], [[0, 1], ['left', 'right']], [[0, 2], ['left']]], [[[0, -2], ['right']], [[0, -1], ['left', 'right']], [[0, 0], ['bottom', 'left']], [[1, 0], ['top', 'bottom']], [[2, 0], ['top']]], [[[0, 0], ['bottom', 'right']], [[0, 1], ['left', 'right']], [[0, 2], ['left']], [[1, 0], ['top', 'bottom']], [[2, 0], ['top']]]], [[[[-1, 0], ['bottom']], [[0, 0], ['top', 'bottom', 'right']], [[0, 1], ['left']], [[1, -1], ['right']], [[1, 0], ['top', 'left']]], [[[-1, 0], ['bottom']], [[0, -1], ['right']], [[0, 0], ['top', 'bottom', 'left']], [[1, 0], ['top', 'right']], [[1, 1], ['left']]], [[[-1, 0], ['bottom']], [[0, -1], ['right']], [[0, 0], ['top', 'left', 'right']], [[0, 1], ['bottom', 'left']], [[1, 1], ['top']]], [[[-1, 0], ['bottom']], [[0, -1], ['bottom', 'right']], [[0, 0], ['top', 'left', 'right']], [[0, 1], ['left']], [[1, -1], ['top']]], [[[-1, 0], ['bottom', 'right']], [[-1, 1], ['left']], [[0, -1], ['right']], [[0, 0], ['top', 'bottom', 'left']], [[1, 0], ['top']]], [[[-1, -1], ['right']], [[-1, 0], ['bottom', 'left']], [[0, 0], ['top', 'bottom', 'right']], [[0, 1], ['left']], [[1, 0], ['top']]], [[[-1, -1], ['bottom']], [[0, -1], ['top', 'right']], [[0, 0], ['bottom', 'left', 'right']], [[0, 1], ['left']], [[1, 0], ['top']]], [[[-1, 1], ['bottom']], [[0, -1], ['right']], [[0, 0], ['bottom', 'left', 'right']], [[0, 1], ['top', 'left']], [[1, 0], ['top']]]], [[[[-1, 1], ['bottom']], [[0, -2], ['right']], [[0, -1], ['left', 'right']], [[0, 0], ['left', 'right']], [[0, 1], ['top', 'left']]], [[[-1, -1], ['bottom']], [[0, -1], ['top', 'right']], [[0, 0], ['left', 'right']], [[0, 1], ['left', 'right']], [[0, 2], ['left']]], [[[-1, -1], ['right']], [[-1, 0], ['bottom', 'left']], [[0, 0], ['top', 'bottom']], [[1, 0], ['top', 'bottom']], [[2, 0], ['top']]], [[[-1, 0], ['bottom', 'right']], [[-1, 1], ['left']], [[0, 0], ['top', 'bottom']], [[1, 0], ['top', 'bottom']], [[2, 0], ['top']]], [[[0, -1], ['bottom', 'right']], [[0, 0], ['left', 'right']], [[0, 1], ['left', 'right']], [[0, 2], ['left']], [[1, -1], ['top']]], [[[0, -2], ['right']], [[0, -1], ['left', 'right']], [[0, 0], ['left', 'right']], [[0, 1], ['bottom', 'left']], [[1, 1], ['top']]], [[[-2, 0], ['bottom']], [[-1, 0], ['top', 'bottom']], [[0, 0], ['top', 'bottom']], [[1, 0], ['top', 'right']], [[1, 1], ['left']]], [[[-2, 0], ['bottom']], [[-1, 0], ['top', 'bottom']], [[0, 0], ['top', 'bottom']], [[1, -1], ['right']], [[1, 0], ['top', 'left']]]]];
+let piece_state = [0,0,0,0,0,0,0,0,0,0,0,0,0];
+let solutions_found = [];
+
+const fromHexString = (hexString) =>
+  Uint8Array.from(hexString.match(/.{1,2}/g).map((byte) => parseInt(byte, 16)));
+
+const toHexString = (bytes) =>
+  bytes.reduce((str, byte) => str + byte.toString(16).padStart(2, '0'), '');
+
+const get_board_box_sz = () => {
+  let boxes = document.getElementsByClassName("board-box");
+  return boxes[0].getBoundingClientRect().width;
+}
+
+const draw_piece = (piece_id) => {
+  const rot_id = piece_state[piece_id];
+  const info = PIECE_INFO[piece_id][rot_id];
+  const sz = get_board_box_sz();
+  let pin = document.getElementById(`pin-${piece_id}`);
+  let new_children = [];
+  info.forEach(part_info => {
+    [[y,x], border_info] = part_info;
+    box = document.createElement("div");
+    box.classList.add("piece-box");
+    box.classList.add("piece-part");
+    box.classList.add(`piece-box-${((x+y)%2 == 0) ? "white" : "black"}`)
+    box.style.left = `${(x-.5)*sz}px`;
+    box.style.top = `${(y-.5)*sz}px`;
+    if (!border_info.includes("top")) box.style.borderTop = BORDER_STYLE;
+    if (!border_info.includes("bottom")) box.style.borderBottom = BORDER_STYLE;
+    if (!border_info.includes("left")) box.style.borderLeft = BORDER_STYLE;
+    if (!border_info.includes("right")) box.style.borderRight = BORDER_STYLE;
+    new_children.push(box);
+  })
+  pin.replaceChildren(...new_children);
+}
+
+const check_if_solution = () => {
+  if (![...Array(13).keys()].every(i => 
+    document.getElementById(`pin-${i}`).parentElement.classList.contains("board-box-white")
+  )) return false;
+  const sol = [...Array(13).keys()].flatMap(i => {
+    const grid_yx = document.getElementById(`pin-${i}`).parentElement.style.gridArea;
+    const [ys, xs] = grid_yx.split(" / ");
+    return [piece_state[i], parseInt(ys) - 1, parseInt(xs) - 1];
+  });
+  let empty = new Array(64).fill(0);
+  [...Array(13).keys()].forEach(i => {
+    const [p, y, x] = [PIECE_INFO[i][sol[3*i]], sol[3*i + 1], sol[3*i + 2]];
+    p.forEach(c => {
+      const [cy, cx] = c[0];
+      const [sy, sx] = [cy + y, cx + x];
+      if (0 > sy || sy >= 8 || 0 > sx || sx >= 8) return;
+      empty[sy*8 + sx] += 1;
+    });
+  });
+  return [...empty].every(b => b === 1);
+}
+
+const get_hex_solution = () => {
+  const sol = [...Array(13).keys()].flatMap(i => {
+    const grid_yx = document.getElementById(`pin-${i}`).parentElement.style.gridArea;
+    const [ys, xs] = grid_yx.split(" / ");
+    return [piece_state[i], parseInt(ys) - 1, parseInt(xs) - 1];
+  })
+  return toHexString(sol);
+}
+
+const move_pieces_from_hex = (sol_text) => {
+  const sol_info = fromHexString(sol_text);
+  [...Array(13).keys()].forEach(i => {
+    piece_state[i] = sol_info[i*3];
+    const [ys,xs] = [sol_info[i*3 + 1], sol_info[i*3 + 2]];
+    const pin = document.getElementById(`pin-${i}`);
+    pin.parentElement.removeChild(pin);
+    document.getElementById(`board-box-${ys}-${xs}`).appendChild(pin);
+  });
+  draw_pieces();
+}
+
+const push_record = (hexsol) => {
+  const sol_record = document.createElement("div");
+  sol_record.classList.add("solution-record");
+  sol_record.textContent = hexsol;
+  document.getElementById("solutions-found").appendChild(sol_record);
+
+  sol_record.addEventListener("click", (e) => {
+    move_pieces_from_hex(sol_record.textContent);
+  })
+}
+
+const output_message = (msg) => {
+  const outputbox = document.getElementById("output-msg");
+  outputbox.textContent = msg;
+}
+
+const register_solution = () => {
+  if (!check_if_solution()) return;
+  const hexsol = get_hex_solution();
+  if (solutions_found.includes(hexsol)) {
+    output_message("Solution found before");
+    return;
+  } else {
+    output_message(`Solution found! Assigned hex: ${hexsol}`)
+  }
+  solutions_found.push(hexsol);
+  document.getElementById("solution-counter").textContent = solutions_found.length.toString();
+  push_record(hexsol);
+
+  if (solutions_found.length === 340) {
+    const solstring = [...solutions_found].sort().join("");
+    window.crypto.subtle
+      .digest("SHA-256", fromHexString(solstring))
+      .then(c => output_message(`All 340 solutions found! Here's the flag: grey{${toHexString(new Uint8Array(c))}}`));
+  }
+}
+
+let dragged = null;
+const handleDragStart = e => {
+  e.dataTransfer.effectAllowed = 'move';
+  dragged = e.target;
+
+  document.querySelectorAll(".board-box-white").forEach(b => {
+    b.style.backgroundColor = "aquamarine";
+    b.style.border = "3px dotted black";
+  });
+}
+
+const handleDragEnd = e => {
+  document.querySelectorAll(".board-box-white").forEach(b => {
+    b.style.backgroundColor = "beige";
+    b.style.border = "0px";
+  });
+}
+
+const handleDrop = e => {
+  e.stopPropagation();
+  if (e.target.children.length != 0) return;
+  e.target.appendChild(dragged);
+  register_solution();
+  return false;
+}
+
+const handleDragOver = e => {
+  event.preventDefault();
+}
+
+const handleRightClick = e => {
+  e.preventDefault();
+  const piece_id = parseInt(e.target.id.slice(4));
+  const num_rots = PIECE_INFO[piece_id].length;
+  piece_state[piece_id] = (piece_state[piece_id] + 1) % num_rots;
+  draw_pieces();
+  register_solution();
+}
+
+const draw_pieces = () => {
+  const sz = get_board_box_sz();
+  document.querySelectorAll('.piece-home').forEach(b => {
+    b.style.width = `calc(min(${sz*5}px, 20%)`;
+    b.style.height = `calc(min(${sz*4}px, 20%))`;
+  });
+  
+  [...Array(13).keys()].forEach(draw_piece);
+  document.querySelectorAll('.piece-box').forEach(b => {
+    b.style.width = `${sz}px`;
+    b.style.height = `${sz}px`;
+  });
+}
+
+
+const init_board = () => {
+  document.getElementById("solution-counter").textContent = solutions_found.length.toString();
+  let board = document.getElementById("board");
+  [...Array(8).keys()].forEach(y => [...Array(8).keys()].forEach(x => {
+    box = document.createElement("div");
+    box.classList.add("board-box");
+    box.classList.add(`board-box-${((x+y)%2 == 0) ? "white" : "black"}`)
+    box.classList.add("region");
+    box.id = `board-box-${x}-${y}`;
+    box.style.gridArea = `${x+1} / ${y+1}`;
+    board.appendChild(box);
+  }))
+
+  let piece_space = document.getElementById("piece-space");
+  [...Array(13).keys()].forEach(i => {
+    let piece_home = document.createElement("div");
+    piece_home.classList.add("piece-home");
+    let piece_pin = document.createElement("div");
+    piece_pin.id = `pin-${i}`;
+    piece_pin.classList.add("piece-pin");
+    piece_pin.draggable = true;
+    piece_home.appendChild(piece_pin);
+    piece_space.appendChild(piece_home);
+  })
+
+  draw_pieces();
+
+  document.querySelectorAll('.piece-pin').forEach(b => {
+    b.addEventListener('dragstart', handleDragStart);
+    b.addEventListener('dragend', handleDragEnd);
+    b.addEventListener('contextmenu', handleRightClick, false);
+  });
+
+  document.querySelectorAll('.board-box-white, .piece-home').forEach(b => {
+    b.addEventListener("drop", handleDrop);
+    b.addEventListener("dragover", handleDragOver);
+  })
+}
+
+window.addEventListener('load', init_board);
+window.addEventListener('resize', draw_pieces);
+</script>
+
+<div id="game" class="region">
+  <div id="board-space" class="region">
+      <div id="instructions">
+        Drag the pieces to completely fill the box with no overlap,
+        maintaining the checkerboard pattern. Right-click the pieces to
+        rotate or flip.
+        <br> <br>
+        Find all solutions.
+      </div>
+      <div id="output-msg" class="region"></div>
+      <h2>Solutions found: <span id="solution-counter"></span></h2>
+      <div id="solutions-found" class="region">
+        
+      </div>
+      <div id="board"></div>
+  </div>
+  <div id="piece-space" class="region">
+    
+  </div>
+</div>
